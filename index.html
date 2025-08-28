@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recording in Progress</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin: 20px 0 10px;
+    }
+    #timer {
+      font-size: 4em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #final-message {
+      display: none;
+      font-size: 2em;
+      margin-top: 20px;
+    }
+    .animation {
+      width: 200px;
+      height: 200px;
+      background: url('https://media2.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bzFjNGxjcTU5MjR2dG42d2J5cGJ5Zng1OXEyeGd1NnRrdDByMDdneSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/lW82vqF5vXRpjXkZZ0/giphy.webp') center center no-repeat;
+      background-size: contain;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="animation"></div>
+  <h1>Video recording in progress for testing</h1>
+  <p>Please keep moving!</p>
+  <div id="timer">05:00</div>
+  <div id="final-message">Almost done… Finishing up the recording…</div>
+
+  <script>
+    let timeLeft = 5 * 60;
+    const timerEl = document.getElementById('timer');
+    const finalMessage = document.getElementById('final-message');
+
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      if (timeLeft > 0) {
+        timeLeft--;
+      } else {
+        timerEl.style.display = 'none';
+        finalMessage.style.display = 'block';
+        clearInterval(timerInterval);
+      }
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>
